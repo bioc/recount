@@ -556,7 +556,7 @@ junctions <- GRanges(seqnames = 'chr2', IRanges(
 snaptron_query(junctions)
 ```
 
-If you use `snaptron_query()` please cite [stingray.cs.jhu.edu:8090/snaptron/docs/](http://stingray.cs.jhu.edu:8090/snaptron/docs/). _Snaptron_ is separate from `r Biocpkg('recount')`. Thank you!
+If you use `snaptron_query()` please cite [snaptron.cs.jhu.edu/snaptron/docs/](http://snaptron.cs.jhu.edu/snaptron/docs/). _Snaptron_ is separate from `r Biocpkg('recount')`. Thank you!
 
 
 # Basics
