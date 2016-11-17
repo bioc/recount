@@ -836,7 +836,7 @@ save(rse_gene_SRP009615, file = '../data/rse_gene_SRP009615.RData',
 unlink('rse_gene.Rdata')
 ```
 
-```{r 'cleanup', echo = FALSE}
+```{r 'cleanup', echo = FALSE, results = 'hide'}
 ## Clean up
 unlink('SRP009615', recursive = TRUE)
 ```
