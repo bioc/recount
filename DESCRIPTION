@@ -1,6 +1,6 @@
 Package: recount
 Title: Explore and download data from the recount project
-Version: 1.0.4
+Version: 1.0.5
 Date: 2016-11-29
 Authors@R: c(person("Leonardo", "Collado-Torres", role = c("aut", "cre"),
     email = "lcollado@jhu.edu"), person("Abhinav", "Nellore", role = "ctb",
@@ -33,7 +33,7 @@ Imports:
     utils
 Suggests:
     AnnotationDbi,
-    BiocStyle (>= 2.3.12),
+    BiocStyle (>= 2.2.1),
     DESeq2,
     devtools (>= 1.6),
     EnsDb.Hsapiens.v79,
