@@ -1,3 +1,12 @@
+CHANGES IN VERSION 1.0.8
+------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o The gene and exon counts are now based on Gencode v25 instead of
+        UCSC knownGene hg38.
+
+
 CHANGES IN VERSION 1.0.7
 ------------------------
 
