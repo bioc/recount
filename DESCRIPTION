@@ -33,7 +33,7 @@ Imports:
     utils
 Suggests:
     AnnotationDbi,
-    BiocStyle (>= 2.3.20),
+    BiocStyle,
     DESeq2,
     devtools (>= 1.6),
     EnsDb.Hsapiens.v79,
@@ -41,7 +41,7 @@ Suggests:
     knitcitations,
     knitr (>= 1.6),
     org.Hs.eg.db,
-    regionReport (>= 1.9.4),
+    regionReport,
     rmarkdown (>= 0.9.5),
     testthat
 VignetteBuilder: knitr
