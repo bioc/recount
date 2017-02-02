@@ -553,7 +553,7 @@ library('GenomeInfoDb')
 seqlevelsStyle(exons) <- 'UCSC'
 
 ## Get the count matrix at the exon level for chrY
-exons_chrY <- keepSeqlevels(exons, 'chrY', pruning.mode = 'coarse')
+exons_chrY <- keepSeqlevels(exons, 'chrY')
 exonMatrix <- coverage_matrix('SRP009615', 'chrY', unlist(exons_chrY),
     chunksize = 3000)
 dim(exonMatrix)
