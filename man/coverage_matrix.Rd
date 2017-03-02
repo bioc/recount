@@ -47,9 +47,8 @@ will be printed.}
 \code{outdir} is specified but the required files are missing.}
 }
 \value{
-A matrix with one row per region and one column per sample. The
-numbers in the cells are the counts (number of reads, or fraction in some
-cases) overlapping the region.
+A \link[SummarizedExperiment]{RangedSummarizedExperiment-class}
+object with the counts stored in the assays slot.
 }
 \description{
 Given a set of genomic regions as created by \link{expressed_regions}, this
@@ -65,6 +64,11 @@ project and/or are thinking of using different sets of \code{regions} (for
 example, from different cutoffs applied to \link{expressed_regions}).
 Alternatively check the \code{SciServer} section on the vignette to see
 how to access all the recount data via a R Jupyter Notebook.
+
+If you have \code{bwtool} installed, you can use
+\url{https://github.com/LieberInstitute/recount.bwtool} for faster results.
+Note that you will need to run \link{scale_counts} after running
+\code{coverage_matrix_bwtool()}.
 }
 \examples{
 
@@ -75,18 +79,17 @@ if(.Platform$OS.type != 'windows') {
         maxClusterGap = 3000L)
 
     ## Now calculate the coverage matrix for this study
-    coverageMatrix <- coverage_matrix('DRP002835', 'chrY', regions)
+    rse <- coverage_matrix('DRP002835', 'chrY', regions)
 
     ## One row per region
-    identical(length(regions), nrow(coverageMatrix))
+    identical(length(regions), nrow(rse))
 }
 
-}
-\author{
-Leonardo Collado-Torres
 }
 \seealso{
 \link{download_study}, \link[derfinder]{findRegions},
 \link[derfinder]{railMatrix}
 }
-
+\author{
+Leonardo Collado-Torres
+}
