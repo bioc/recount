@@ -520,11 +520,20 @@ The [recount project](https://jhubiostatistics.shinyapps.io/recount/) also hosts
 
 For an annotation-agnostic differential expression analysis, we first need to define the regions of interest. With `r Biocpkg('recount')` we can do so using the `expressed_regions()` function as shown below for the same study we studied earlier.
 
+```{r 'download_bigwigs', eval = .Platform$OS.type != 'windows'}
+## Normally, one can use rtracklayer::import() to access remote parts of BigWig
+## files without having to download the complete files. However, as of
+## 2024-05-20 this doesn't seem to be working well. So this is a workaround to
+## issue https://github.com/lawremi/rtracklayer/issues/83
+download_study("SRP009615", type = "mean")
+download_study("SRP009615", type = "samples")
+```
+
 ```{r 'define_ers', eval = .Platform$OS.type != 'windows'}
 ## Define expressed regions for study SRP009615, only for chromosome Y
 regions <- expressed_regions("SRP009615", "chrY",
     cutoff = 5L,
-    maxClusterGap = 3000L
+    maxClusterGap = 3000L, outdir = "SRP009615"
 )
 
 ## Briefly explore the resulting regions
@@ -539,7 +548,7 @@ Having defined the expressed regions, we can now compute a coverage matrix for t
 
 ```{r 'compute_covMat', eval = .Platform$OS.type != 'windows'}
 ## Compute coverage matrix for study SRP009615, only for chromosome Y
-system.time(rse_ER <- coverage_matrix("SRP009615", "chrY", regions))
+system.time(rse_ER <- coverage_matrix("SRP009615", "chrY", regions, outdir = "SRP009615"))
 
 ## Explore the RSE a bit
 dim(rse_ER)
