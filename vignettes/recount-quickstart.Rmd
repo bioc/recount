@@ -645,9 +645,6 @@ For an `rse_exon` object, the `rownames()` correspond to the Gencode `gene_id`. 
 download_study("SRP009615", type = "rse-exon")
 load(file.path("SRP009615", "rse_exon.Rdata"))
 
-## Delete it if you don't need it anymore
-unlink("SRP009615", recursive = TRUE)
-
 ## Annotation information
 rowRanges(rse_exon)
 
@@ -684,7 +681,7 @@ seqlevelsStyle(exons) <- "UCSC"
 ## Get the count matrix at the exon level for chrY
 exons_chrY <- keepSeqlevels(exons, "chrY", pruning.mode = "coarse")
 exonRSE <- coverage_matrix("SRP009615", "chrY", unlist(exons_chrY),
-    chunksize = 3000
+    chunksize = 3000, outdir = "SRP009615"
 )
 exonMatrix <- assays(exonRSE)$counts
 dim(exonMatrix)
