@@ -520,7 +520,7 @@ The [recount project](https://jhubiostatistics.shinyapps.io/recount/) also hosts
 
 For an annotation-agnostic differential expression analysis, we first need to define the regions of interest. With `r Biocpkg('recount')` we can do so using the `expressed_regions()` function as shown below for the same study we studied earlier.
 
-```{r 'download_bigwigs', eval = .Platform$OS.type != 'windows'}
+```{r 'download_bigwigs'}
 ## Normally, one can use rtracklayer::import() to access remote parts of BigWig
 ## files without having to download the complete files. However, as of
 ## 2024-05-20 this doesn't seem to be working well. So this is a workaround to
@@ -529,7 +529,7 @@ download_study("SRP009615", type = "mean")
 download_study("SRP009615", type = "samples")
 ```
 
-```{r 'define_ers', eval = .Platform$OS.type != 'windows'}
+```{r 'define_ers'}
 ## Define expressed regions for study SRP009615, only for chromosome Y
 regions <- expressed_regions("SRP009615", "chrY",
     cutoff = 5L,
@@ -546,7 +546,7 @@ Once the regions have been defined, you can export them into a BED file using `r
 
 Having defined the expressed regions, we can now compute a coverage matrix for these regions. We can do so using the function `coverage_matrix()` from `r Biocpkg('recount')` as shown below. It returns a _RangedSummarizedExperiment_ object.
 
-```{r 'compute_covMat', eval = .Platform$OS.type != 'windows'}
+```{r 'compute_covMat'}
 ## Compute coverage matrix for study SRP009615, only for chromosome Y
 system.time(rse_ER <- coverage_matrix("SRP009615", "chrY", regions, outdir = "SRP009615"))
 
@@ -557,7 +557,7 @@ rse_ER
 
 The resulting count matrix has one row per region and one column per sample. The counts correspond to the number (or fraction) of reads overlapping the regions and are scaled by default to a library size of 40 million reads. For some differential expression methods, you might have to round this matrix into integers. We'll use `r Biocpkg('DESeq2')` to identify which expressed regions are differentially expressed.
 
-```{r 'to_integer', eval = .Platform$OS.type != 'windows'}
+```{r 'to_integer'}
 ## Round the coverage matrix to integers
 covMat <- round(assays(rse_ER)$counts, 0)
 ```
@@ -568,7 +568,7 @@ You can use `scale = FALSE` if you want the raw base-pair coverage counts and th
 
 We first need to get some phenotype information for these samples similar to the first analysis we did. We can get this data using `download_study()`.
 
-```{r 'phenoData', eval = .Platform$OS.type != 'windows'}
+```{r 'phenoData'}
 ## Get phenotype data for study SRP009615
 pheno <- colData(rse_ER)
 
@@ -582,7 +582,7 @@ head(pheno)
 
 Now that we have the necessary data, we can construct a `DESeqDataSet` object using the function `DESeqDataSetFromMatrix()` from `r Biocpkg('DESeq2')`.
 
-```{r 'ers_dds', eval = .Platform$OS.type != 'windows'}
+```{r 'ers_dds'}
 ## Build a DESeqDataSet
 dds_ers <- DESeqDataSetFromMatrix(
     countData = covMat, colData = pheno,
@@ -595,7 +595,7 @@ dds_ers <- DESeqDataSetFromMatrix(
 
 With the `DESeqDataSet` object in place, we can then use the function `DESeq()` from `r Biocpkg('DESeq2')` to perform the differential expression analysis (between groups) as shown below.
 
-```{r 'de_analysis_ers', eval = .Platform$OS.type != 'windows'}
+```{r 'de_analysis_ers'}
 ## Perform differential expression analysis with DESeq2 at the ER-level
 dds_ers <- DESeq(dds_ers,
     test = "LRT", reduced = ~gene_target,
@@ -606,7 +606,7 @@ res_ers <- results(dds_ers)
 
 We can then visually explore the results as shown in Figure \@ref(fig:maploters), like we did before in Figure \@ref(fig:maplot).
 
-```{r 'maploters', eval = .Platform$OS.type != 'windows', fig.cap = "MA plot for group differences adjusted by gene target for SRP009615 using ER-level data (just chrY)."}
+```{r 'maploters', fig.cap = "MA plot for group differences adjusted by gene target for SRP009615 using ER-level data (just chrY)."}
 ## Explore results
 plotMA(res_ers, main = "DESeq2 results for SRP009615 (ER-level, chrY)")
 ```
@@ -670,7 +670,7 @@ If you are interested in using another annotation based on hg38 coordinates you 
 
 If you are re-processing a small set of samples, it simply might be easier to use `coverage_matrix()` as shown below using the annotation information provided by the `r Biocpkg('EnsDb.Hsapiens.v79')` package.
 
-```{r "newer annotation", eval = .Platform$OS.type != 'windows'}
+```{r "newer annotation"}
 ## Get the disjoint exons based on EnsDb.Hsapiens.v79 which matches hg38
 exons <- reproduce_ranges("exon", db = "EnsDb.Hsapiens.v79")
 

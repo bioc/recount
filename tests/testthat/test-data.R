@@ -108,40 +108,38 @@ test_that("Scaling", {
     ), assay(rse_gene_SRP009615, 1))
 })
 
-if (.Platform$OS.type != "windows") {
-    regions <- expressed_regions("SRP002001", "chrY", cutoff = 5, outdir = tmpdir)
-    ## Artificially remove the mean coverage file so that the file will have to
-    ## get downloaded on the first test, then it'll be present for the second
-    ## test
-    unlink(localfiles["mean_SRP002001.bw"])
+regions <- expressed_regions("SRP002001", "chrY", cutoff = 5, outdir = tmpdir)
+## Artificially remove the mean coverage file so that the file will have to
+## get downloaded on the first test, then it'll be present for the second
+## test
+unlink(localfiles["mean_SRP002001.bw"])
 
-    test_that("Expressed regions", {
-        expect_equal(
-            regions,
-            expressed_regions("SRP002001", "chrY", cutoff = 5, outdir = tmpdir)
+test_that("Expressed regions", {
+    expect_equal(
+        regions,
+        expressed_regions("SRP002001", "chrY", cutoff = 5, outdir = tmpdir)
+    )
+})
+
+
+rse_ER <- coverage_matrix("SRP002001", "chrY", regions, outdir = tmpdir)
+## Same for the phenotype data and the sample bigwig file
+unlink(localfiles["SRP002001.tsv"])
+unlink(localfiles["SRR036661.bw"])
+
+test_that("Coverage matrix", {
+    expect_equal(
+        rse_ER,
+        coverage_matrix("SRP002001", "chrY", regions, outdir = tmpdir)
+    )
+    expect_equal(
+        rse_ER,
+        coverage_matrix("SRP002001", "chrY", regions,
+                        outdir = tmpdir,
+                        chunksize = 500
         )
-    })
-
-
-    rse_ER <- coverage_matrix("SRP002001", "chrY", regions, outdir = tmpdir)
-    ## Same for the phenotype data and the sample bigwig file
-    unlink(localfiles["SRP002001.tsv"])
-    unlink(localfiles["SRR036661.bw"])
-
-    test_that("Coverage matrix", {
-        expect_equal(
-            rse_ER,
-            coverage_matrix("SRP002001", "chrY", regions, outdir = tmpdir)
-        )
-        expect_equal(
-            rse_ER,
-            coverage_matrix("SRP002001", "chrY", regions,
-                outdir = tmpdir,
-                chunksize = 500
-            )
-        )
-    })
-}
+    )
+})
 
 ## Check size once:
 # > tmpdir

@@ -54,25 +54,22 @@
 #'
 #' @examples
 #'
-#' if (.Platform$OS.type != "windows") {
-#'     ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
-#'     download_study("SRP002001", type = "mean")
-#'     download_study("SRP002001", type = "samples")
+#' ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
+#' download_study("SRP002001", type = "mean")
+#' download_study("SRP002001", type = "samples")
 #'
-#'     ## Reading BigWig files is not supported by rtracklayer on Windows
-#'     ## Define expressed regions for study DRP002835, chrY
-#'     regions <- expressed_regions("SRP002001", "chrY",
-#'         cutoff = 5L,
-#'         maxClusterGap = 3000L,
-#'         outdir = "SRP002001"
-#'     )
+#' ## Define expressed regions for study DRP002835, chrY
+#' regions <- expressed_regions("SRP002001", "chrY",
+#'     cutoff = 5L,
+#'     maxClusterGap = 3000L,
+#'     outdir = "SRP002001"
+#' )
 #'
-#'     ## Now calculate the coverage matrix for this study
-#'     rse <- coverage_matrix("SRP002001", "chrY", regions, outdir = "SRP002001")
+#' ## Now calculate the coverage matrix for this study
+#' rse <- coverage_matrix("SRP002001", "chrY", regions, outdir = "SRP002001")
 #'
-#'     ## One row per region
-#'     identical(length(regions), nrow(rse))
-#' }
+#' ## One row per region
+#' identical(length(regions), nrow(rse))
 coverage_matrix <- function(
         project, chr, regions, chunksize = 1000,
         bpparam = NULL, outdir = NULL, chrlen = NULL, verbose = TRUE,
@@ -81,11 +78,6 @@ coverage_matrix <- function(
     stopifnot(is.character(project) & length(project) == 1)
     stopifnot(is.character(chr) & length(chr) == 1)
     stopifnot((is.numeric(chunksize) | is.integer(chunksize)) & length(chunksize) == 1)
-
-    ## Windows-specific info
-    if (.Platform$OS.type == "windows") {
-        warning("rtracklayer does not support importing BigWig files on Windows, so this function might not work")
-    }
 
     ## Use table from the package
     url_table <- recount::recount_url

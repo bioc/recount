@@ -37,18 +37,17 @@
 #' [railMatrix][derfinder::railMatrix]
 #'
 #' @examples
-#' ## Define expressed regions for study DRP002835, chrY
-#' if (.Platform$OS.type != "windows") {
-#'     ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
-#'     download_study("SRP002001", type = "mean")
+#' ## Define expressed regions for study SRP002001, chrY
 #'
-#'     ## Reading BigWig files is not supported by rtracklayer on Windows
-#'     regions <- expressed_regions("SRP002001", "chrY",
-#'         cutoff = 5L,
-#'         maxClusterGap = 3000L,
-#'         outdir = "SRP002001"
-#'     )
-#' }
+#' ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
+#' download_study("SRP002001", type = "mean")
+#'
+#' regions <- expressed_regions("SRP002001", "chrY",
+#'     cutoff = 5L,
+#'     maxClusterGap = 3000L,
+#'     outdir = "SRP002001"
+#' )
+#'
 #' \dontrun{
 #' ## Define the regions for multiple chrs
 #' regs <- sapply(chrs, expressed_regions, project = "SRP002001", cutoff = 5L)
@@ -64,11 +63,6 @@ expressed_regions <- function(
     ## Check inputs
     stopifnot(is.character(project) & length(project) == 1)
     stopifnot(is.character(chr) & length(chr) == 1)
-
-    ## Windows-specific info
-    if (.Platform$OS.type == "windows") {
-        warning("rtracklayer does not support importing BigWig files on Windows, so this function might not work")
-    }
 
     ## Use table from the package
     url_table <- recount::recount_url
