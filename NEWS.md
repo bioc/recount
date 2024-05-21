@@ -1,3 +1,13 @@
+# recount
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* Remove warnings related to using `coverage_matrix()` or `expressed_regions()`
+on Windows as `rtracklayer::import()` does work with local BigWig files on
+that operating system. I'm not sure if it will work with remote BigWig files
+given that remote BigWig file access on other operating systems is not working
+due to https://github.com/lawremi/rtracklayer/issues/83 and related issues.
+
 # recount 1.29.1
 
 BUG FIXES
