@@ -670,7 +670,7 @@ If you are interested in using another annotation based on hg38 coordinates you 
 
 If you are re-processing a small set of samples, it simply might be easier to use `coverage_matrix()` as shown below using the annotation information provided by the `r Biocpkg('EnsDb.Hsapiens.v79')` package.
 
-```{r, eval = .Platform$OS.type != 'windows'}
+```{r "newer annotation", eval = .Platform$OS.type != 'windows'}
 ## Get the disjoint exons based on EnsDb.Hsapiens.v79 which matches hg38
 exons <- reproduce_ranges("exon", db = "EnsDb.Hsapiens.v79")
 
