@@ -52,17 +52,21 @@ identify the expressed regions (ERs) for a given chromosome. It returns a
 defined by \link[derfinder:findRegions]{findRegions}.
 }
 \examples{
-## Define expressed regions for study SRP009615, chrY
+## Define expressed regions for study DRP002835, chrY
 if (.Platform$OS.type != "windows") {
+    ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
+    download_study("SRP002001", type = "mean")
+
     ## Reading BigWig files is not supported by rtracklayer on Windows
-    regions <- expressed_regions("SRP009615", "chrY",
+    regions <- expressed_regions("SRP002001", "chrY",
         cutoff = 5L,
-        maxClusterGap = 3000L
+        maxClusterGap = 3000L,
+        outdir = "SRP002001"
     )
 }
 \dontrun{
 ## Define the regions for multiple chrs
-regs <- sapply(chrs, expressed_regions, project = "SRP009615", cutoff = 5L)
+regs <- sapply(chrs, expressed_regions, project = "SRP002001", cutoff = 5L)
 
 ## You can then combine them into a single GRanges object if you want to
 library("GenomicRanges")

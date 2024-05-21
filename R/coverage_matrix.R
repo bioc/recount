@@ -55,15 +55,20 @@
 #' @examples
 #'
 #' if (.Platform$OS.type != "windows") {
+#'     ## Workaround for https://github.com/lawremi/rtracklayer/issues/83
+#'     download_study("SRP002001", type = "mean")
+#'     download_study("SRP002001", type = "samples")
+#'
 #'     ## Reading BigWig files is not supported by rtracklayer on Windows
 #'     ## Define expressed regions for study DRP002835, chrY
-#'     regions <- expressed_regions("DRP002835", "chrY",
+#'     regions <- expressed_regions("SRP002001", "chrY",
 #'         cutoff = 5L,
-#'         maxClusterGap = 3000L
+#'         maxClusterGap = 3000L,
+#'         outdir = "SRP002001"
 #'     )
 #'
 #'     ## Now calculate the coverage matrix for this study
-#'     rse <- coverage_matrix("DRP002835", "chrY", regions)
+#'     rse <- coverage_matrix("SRP002001", "chrY", regions, outdir = "SRP002001")
 #'
 #'     ## One row per region
 #'     identical(length(regions), nrow(rse))
