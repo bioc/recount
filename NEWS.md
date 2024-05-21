@@ -1,4 +1,4 @@
-# recount
+# recount 1.30.2
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
