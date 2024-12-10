@@ -24,7 +24,7 @@ dependencies](https://bioconductor.org/shields/dependencies/release/recount.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/leekgroup/recount/branch/devel/graph/badge.svg)](https://codecov.io/gh/leekgroup/recount?branch=devel)
 [![R build
-status](https://github.com/leekgroup/recount/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/leekgroup/recount/actions)
+status](https://github.com/leekgroup/recount/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/leekgroup/recount/actions/workflows/check-bioc.yml)
 [![GitHub
 issues](https://img.shields.io/github/issues/leekgroup/recount)](https://github.com/leekgroup/recount/issues)
 [![GitHub
