@@ -38,14 +38,14 @@ bib <- c(
         title = "AnnotationDbi: Annotation Database Interface",
         year = 2017, doi = "10.18129/B9.bioc.AnnotationDbi"
     ),
-    BiocParallel = citation("BiocParallel"),
-    BiocStyle = citation("BiocStyle"),
+    BiocParallel = citation("BiocParallel")[1],
+    BiocStyle = citation("BiocStyle")[1],
     derfinder = citation("derfinder")[1],
-    DESeq2 = citation("DESeq2"),
-    sessioninfo = citation("sessioninfo"),
-    downloader = citation("downloader"),
-    EnsDb.Hsapiens.v79 = citation("EnsDb.Hsapiens.v79"),
-    GEOquery = citation("GEOquery"),
+    DESeq2 = citation("DESeq2")[1],
+    sessioninfo = citation("sessioninfo")[1],
+    downloader = citation("downloader")[1],
+    EnsDb.Hsapiens.v79 = citation("EnsDb.Hsapiens.v79")[1],
+    GEOquery = citation("GEOquery")[1],
     GenomeInfoDb = RefManageR::BibEntry(
         bibtype = "manual",
         key = "GenomeInfoDb",
@@ -53,20 +53,20 @@ bib <- c(
         title = "GenomeInfoDb: Utilities for manipulating chromosome and other 'seqname' identifiers",
         year = 2017, doi = "10.18129/B9.bioc.GenomeInfoDb"
     ),
-    GenomicFeatures = citation("GenomicFeatures"),
-    GenomicRanges = citation("GenomicRanges"),
-    IRanges = citation("IRanges"),
+    GenomicFeatures = citation("GenomicFeatures")[1],
+    GenomicRanges = citation("GenomicRanges")[1],
+    IRanges = citation("IRanges")[1],
     knitr = citation("knitr")[3],
-    org.Hs.eg.db = citation("org.Hs.eg.db"),
-    RCurl = citation("RCurl"),
+    org.Hs.eg.db = citation("org.Hs.eg.db")[1],
+    RCurl = citation("RCurl")[1],
     recount = citation("recount")[1],
     recountworkflow = citation("recount")[2],
     phenopredict = citation("recount")[3],
-    regionReport = citation("regionReport"),
-    rentrez = citation("rentrez"),
+    regionReport = citation("regionReport")[1],
+    rentrez = citation("rentrez")[1],
     RefManageR = citation("RefManageR")[1],
     rmarkdown = citation("rmarkdown")[1],
-    rtracklayer = citation("rtracklayer"),
+    rtracklayer = citation("rtracklayer")[1],
     S4Vectors = RefManageR::BibEntry(
         bibtype = "manual", key = "S4Vectors",
         author = "Hervé Pagès and Michael Lawrence and Patrick Aboyoun",
@@ -80,7 +80,7 @@ bib <- c(
         title = "SummarizedExperiment: SummarizedExperiment container",
         year = 2017, doi = "10.18129/B9.bioc.SummarizedExperiment"
     ),
-    testthat = citation("testthat")
+    testthat = citation("testthat")[1]
 )
 ```
 
